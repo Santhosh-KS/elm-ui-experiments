@@ -1,21 +1,60 @@
-module Main exposing (main)
+module Main exposing (..)
 
-import Browser
-import Html exposing (Html, div, text)
-import Html.Attributes exposing (src, style)
-import VitePluginHelper
+import Element
+    exposing
+        ( Element
+        , alignRight
+        , centerX
+        , centerY
+        , el
+        , explain
+        , fill
+        , height
+        , padding
+        , rgb255
+        , row
+        , spacing
+        , text
+        , width
+        )
+import Element.Background as Background
+import Element.Border as Border
+import Element.Font as Font
 
-type Msg = NoOp
 
-main : Program () Int Msg
 main =
-    Browser.sandbox { init = 0, update = update, view = view }
+    Element.layout [] view
 
 
-update : Msg -> number -> number
-update msg model = 0
+view =
+    Element.column
+        [ width fill
+        , height fill
+        ]
+        [ header
+        , middle
+        , footer
+        ]
 
 
-view : Int -> Html Msg
-view model =
-    div [] [text "hello"]
+header =
+    row
+        [ width fill
+        , Border.width 1
+        ]
+        [ text "Logo"
+        , el [ alignRight ] (text "MyMenuButton")
+        ]
+
+
+middle =
+    row
+        [ explain Debug.todo
+        , height fill
+        , width fill
+        ]
+        [ text "Content" ]
+
+
+footer =
+    text "Footer"
