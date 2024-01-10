@@ -9,22 +9,18 @@ import Element
         , column
         , el
         , explain
-        , fill
-        , height
+        , html
+        , mouseOver
         , padding
         , paddingXY
-        , rgb255
+        , pointer
         , rgb
         , row
-        , spacing
-        , text
-        , width
-        , pointer
-        , mouseOver
         )
 import Element.Background as Background
 import Element.Border as Border
-import Element.Font as Font
+import Svg exposing (..)
+import Svg.Attributes as SA exposing (..)
 
 
 main =
@@ -33,8 +29,8 @@ main =
 
 view =
     Element.column
-        [ width fill
-        , height fill
+        [ Element.width Element.fill
+        , Element.height Element.fill
         ]
         [ header
         , middle
@@ -44,11 +40,11 @@ view =
 
 header =
     row
-        [ width fill
+        [ Element.width Element.fill
         , Border.width 1
         , paddingXY 20 10
         ]
-        [ text "Logo"
+        [ Element.text "Logo"
         , menuButton
         ]
 
@@ -60,47 +56,63 @@ menuButton =
         , Border.width 1
         , Border.rounded 4
         , pointer
-        , mouseOver [Background.color (rgb 0 1 0)]
+        , mouseOver [ Background.color (rgb 0 1 0) ]
         ]
-        (text "MenuButton")
+        (Element.text "MenuButton")
 
 
 middle =
     row
-        [ height fill
-        , width fill
+        [ Element.height Element.fill
+        , Element.width Element.fill
         ]
         [ sidebar
-        , content
+        , svgBody
         ]
 
 
 sidebar =
     column
-        [ height fill
+        [ Element.height Element.fill
         , Border.width 1
         ]
-        [ text "Item1"
-        , text "Item2"
+        [ Element.text "Item1"
+        , Element.text "Item2"
         ]
 
 
 content =
     el
-        [ width fill
-        , height fill
+        [ Element.width Element.fill
+        , Element.height Element.fill
         ]
     <|
         el
             [ centerX
             , centerY
             ]
-            (text "Content")
+            (Element.text "Content")
+
+
+svgBody =
+    html <|
+        svg
+            [ SA.viewBox "0 0 100 100"
+            , SA.fill "green"
+            ]
+            [ Svg.rect
+                [ SA.fill "Red"
+                , SA.width "100%"
+                , SA.height "100%"
+                , SA.opacity "40%"
+                ]
+                []
+            ]
 
 
 footer =
     el
         [ Border.width 1
-        , width fill
+        , Element.width Element.fill
         ]
-        (text "Footer")
+        (Element.text "Footer")

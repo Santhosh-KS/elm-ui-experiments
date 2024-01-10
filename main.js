@@ -10795,22 +10795,6 @@ var $author$project$Main$header = A2(
 			$mdgriffith$elm_ui$Element$text('Logo'),
 			$author$project$Main$menuButton
 		]));
-var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
-var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
-var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
-var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
-var $author$project$Main$content = A2(
-	$mdgriffith$elm_ui$Element$el,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-			$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill)
-		]),
-	A2(
-		$mdgriffith$elm_ui$Element$el,
-		_List_fromArray(
-			[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$centerY]),
-		$mdgriffith$elm_ui$Element$text('Content')));
 var $author$project$Main$sidebar = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
@@ -10823,6 +10807,41 @@ var $author$project$Main$sidebar = A2(
 			$mdgriffith$elm_ui$Element$text('Item1'),
 			$mdgriffith$elm_ui$Element$text('Item2')
 		]));
+var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
+var $elm$core$Basics$always = F2(
+	function (a, _v0) {
+		return a;
+	});
+var $mdgriffith$elm_ui$Internal$Model$unstyled = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Unstyled, $elm$core$Basics$always);
+var $mdgriffith$elm_ui$Element$html = $mdgriffith$elm_ui$Internal$Model$unstyled;
+var $elm$svg$Svg$Attributes$opacity = _VirtualDom_attribute('opacity');
+var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
+var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
+var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
+var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
+var $author$project$Main$svgBody = $mdgriffith$elm_ui$Element$html(
+	A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$viewBox('0 0 100 100'),
+				$elm$svg$Svg$Attributes$fill('green')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$svg$Svg$rect,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$fill('Red'),
+						$elm$svg$Svg$Attributes$width('100%'),
+						$elm$svg$Svg$Attributes$height('100%'),
+						$elm$svg$Svg$Attributes$opacity('40%')
+					]),
+				_List_Nil)
+			])));
 var $author$project$Main$middle = A2(
 	$mdgriffith$elm_ui$Element$row,
 	_List_fromArray(
@@ -10831,7 +10850,7 @@ var $author$project$Main$middle = A2(
 			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
 		]),
 	_List_fromArray(
-		[$author$project$Main$sidebar, $author$project$Main$content]));
+		[$author$project$Main$sidebar, $author$project$Main$svgBody]));
 var $author$project$Main$view = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
