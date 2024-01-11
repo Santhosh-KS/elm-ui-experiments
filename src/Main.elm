@@ -1,5 +1,7 @@
 module Main exposing (..)
 
+import Browser
+import Browser.Events exposing (onResize)
 import Element
     exposing
         ( Element
@@ -19,21 +21,69 @@ import Element
         )
 import Element.Background as Background
 import Element.Border as Border
+import Html exposing (Html)
+import Html.Attributes as HA exposing (id)
 import Svg exposing (..)
 import Svg.Attributes as SA exposing (..)
 
 
+
+{- main =
+   Element.layout [] view
+-}
+
+
+type alias Model =
+    { width : Int
+    , height : Int
+    }
+
+
+type Msg
+    = WindowResized Int Int 
+
+
+defaultModel =
+    Model 0 0
+
+
+init : (Int,Int) -> ( Model, Cmd Msg )
+init (width, height) =
+    ( Model width height, Cmd.none )
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        WindowResized w h->
+            ( Model w h, Cmd.none )
+
+
+subscriptions model =
+  onResize WindowResized 
+
+t : Model -> Html Msg
+t model =
+    Element.layout [] <| view model
+
+
 main =
-    Element.layout [] view
+    Browser.element
+        { init = init
+        , view = t 
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
-view =
+view : Model -> Element Msg
+view model =
     Element.column
         [ Element.width Element.fill
         , Element.height Element.fill
         ]
         [ header
-        , middle
+        , middle model
         , footer
         ]
 
@@ -45,6 +95,9 @@ header =
         , paddingXY 20 10
         ]
         [ Element.text "Logo"
+        , menuButton
+        , menuButton
+        , menuButton
         , menuButton
         ]
 
@@ -61,13 +114,15 @@ menuButton =
         (Element.text "MenuButton")
 
 
-middle =
+middle : Model -> Element msg
+middle model =
     row
         [ Element.height Element.fill
         , Element.width Element.fill
+        , "sant" |> HA.id >> Element.htmlAttribute
         ]
         [ sidebar
-        , svgBody
+        , svgBody model
         ]
 
 
@@ -93,12 +148,17 @@ content =
             ]
             (Element.text "Content")
 
-
-svgBody =
+svgBody : Model -> Element msg
+svgBody model =
+  let
+      vb = "0 " ++ "0 " ++ String.fromInt model.height ++ " " ++ String.fromInt model.width
+  in
+  
     html <|
         svg
-            [ SA.viewBox "0 0 100 100"
+            [ SA.viewBox vb 
             , SA.fill "green"
+            , SA.id "MainSVGBody"
             ]
             [ Svg.rect
                 [ SA.fill "Red"

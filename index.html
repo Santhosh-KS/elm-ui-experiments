@@ -8,9 +8,16 @@
 <body>
   <div id="myapp"></div>
   <script>
-  var app = Elm.Main.init({
-    node: document.getElementById('myapp')
-  });
+    var app = Elm.Main.init({
+      node: document.getElementById('myapp'),
+      flags: [window.innerWidth, window.innerHeight]
+    });
   </script>
 </body>
 </html>
+
+    <!-- var idElem = document.getElementById("MainSVGBody");
+    let computedStyle = getComputedStyle(idElem);
+    var width = computedStyle.width;
+      flags: [width, height]
+    var height = computedStyle.height; -->
